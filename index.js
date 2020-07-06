@@ -48,13 +48,33 @@ app.get('/cipher', (req, res) => {
   //     temp.push(String.fromCharCode((text.codePointAt(i) + cipherKey)));
   //   }
 
-  word.map((l)=>{let charCode = l.charCodeAt(); } );
+  word.map((l)=>{
+    let charCode = (l.charCodeAt() + cipherKey);
+
+    if ((charCode - cipherKey) >= 97){
+      if ((charCode ) > 122 ){
+        temp.push(String.fromCharCode((charCode ) - 26));
+      }else{
+        temp.push(String.fromCharCode(charCode ));
+      }
+    }else if ((charCode - cipherKey) >= 65){
+      if ((charCode ) > 90 ){
+        temp.push(String.fromCharCode((charCode ) - 26));
+      }else{
+        temp.push(String.fromCharCode(charCode ));
+      }
+    }
+    
+  });
 
   const response = `new cipher equals ${temp.join('')}`;
   
   res.send(response);
+} );
 
-});
+  
+
+
 
 
 app.listen(8000, () => console.log('server is running on port 8000')); 
