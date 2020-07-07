@@ -72,6 +72,47 @@ app.get('/cipher', (req, res) => {
   res.send(response);
 } );
 
+app.get('/lotto' , (req,res) => {
+  const {arr} = req.query ;
+  let score = 0 ; 
+  let mesg ; 
+
+  arr.map(num => {
+    if(isNaN(Number(num))){
+      res.status(400).send('hey.... that\'s not a number.... try that again -_- ');
+    }
+    let ran = Math.floor(Math.random() * 20) + 1;
+    Number(num) === ran? score ++ : '';
+  });
+  switch(score){
+  case 6 : 
+    mesg = 'Wow! Unbelievable! You could have won the mega millions!';
+    break;
+  case 5 :
+    mesg = 'SO CLOSE 5 / 6';
+    break;
+  case 4 :
+    mesg = 'wooooo 4 / 6';
+    break; 
+  case 3 :
+    mesg = 'yay, but you still win nothing ';
+    break;
+  case 2:
+    mesg = 'eh 2 / 6 ';
+    break;
+  case 1:
+    mesg = 'oof 1/ 6';
+    break;
+  default : 
+    mesg ='and this is why they call the lotto poor tax';
+  }
+  console.log(score);
+  console.log(mesg);
+  res.send(mesg);
+
+});
+
+
   
 
 
